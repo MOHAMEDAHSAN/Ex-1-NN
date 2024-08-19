@@ -1,7 +1,6 @@
-<H3>ENTER YOUR NAME</H3>
-<H3>ENTER YOUR REGISTER NO.</H3>
+<H3>S MOHAMED AHSAN</H3>
+<H3>212223240089</H3>
 <H3>EX. NO.1</H3>
-<H3>DATE</H3>
 <H1 ALIGN =CENTER> Introduction to Kaggle and Data preprocessing</H1>
 
 ## AIM:
@@ -37,11 +36,40 @@ STEP 5:Normalizing the data<BR>
 STEP 6:Splitting the data into test and train<BR>
 
 ##  PROGRAM:
-TYPE YOUR CODE HERE
+```
+from google.colab import files
+import pandas as pd
+import io
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.model_selection import train_test_split
 
+df=pd.read_csv('Churn_Modelling.csv')
+print(df)
+x=df.iloc[:,:-1].values
+y=df.iloc[:,-1].values
+print(x)
+print(y)
+print(df.isnull().sum())
+df = df.drop(['Surname', 'Geography','Gender'], axis=1)
+print(df.isnull().sum())
+y=df.iloc[:,-1].values
+print(y)
 
+scaler=MinMaxScaler()
+df1=pd.DataFrame(scaler.fit_transform(df))
+print(df1)
+
+X_train ,X_test ,y_train,y_test=train_test_split(x,y,test_size=0.2)
+
+print(X_train)
+
+print(X_test)
+
+print("Lenght of X_test ",len(X_test))
+```
 ## OUTPUT:
-SHOW YOUR OUTPUT HERE
+
 
 
 ## RESULT:
