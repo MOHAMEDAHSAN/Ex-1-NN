@@ -3,6 +3,7 @@
 <H3>EX. NO.1</H3>
 <H1 ALIGN =CENTER> Introduction to Kaggle and Data preprocessing</H1>
 
+
 ## AIM:
 
 To perform Data preprocessing in a data set downloaded from Kaggle
@@ -37,42 +38,90 @@ STEP 6:Splitting the data into test and train<BR>
 
 ##  PROGRAM:
 ```
-from google.colab import files
+#import libraries
+
 import pandas as pd
 import io
+import seaborn as sns
+import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
 
-df=pd.read_csv('Churn_Modelling.csv')
-print(df)
-x=df.iloc[:,:-1].values
-y=df.iloc[:,-1].values
-print(x)
-print(y)
-print(df.isnull().sum())
-df = df.drop(['Surname', 'Geography','Gender'], axis=1)
-print(df.isnull().sum())
-y=df.iloc[:,-1].values
-print(y)
+#Read the dataset from drive
+d=pd.read_csv("Churn_Modelling.csv")
+# Finding Missing Values
+print(d.isnull().sum())
 
-scaler=MinMaxScaler()
-df1=pd.DataFrame(scaler.fit_transform(df))
-print(df1)
+#Check for Duplicates
+print(d.duplicated().sum())
 
-X_train ,X_test ,y_train,y_test=train_test_split(x,y,test_size=0.2)
+#Detect Outliers
+plt.figure(figsize=(6,4))
+sns.scatterplot(x='Age', y='Exited', data=d)
+plt.title('Scatter plot of Age vs. Exited')
+plt.show()
 
+#Normalize the dataset
+# Create an instance of MinMaxScaler
+scaler = MinMaxScaler()
+
+# Define the columns to be normalized
+columns = ['CreditScore', 'Age', 'Tenure', 'Balance', 'NumOfProducts', 'EstimatedSalary']
+
+# Normalize the specified columns
+d[columns] = scaler.fit_transform(d[columns])
+
+# Display the normalized dataset
+print("NORMALIZED DATASET\n",d)
+
+#split the dataset into input and output
+X = d.iloc[:,:-1].values
+print("INPUT(X)\n",X)
+y = d.iloc[:,-1].values
+print("OUTPUT(y)\n",y)
+
+#splitting the data for training & Testing
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+print("X_train\n")
 print(X_train)
-
+print("\nLenght of X_train ",len(X_train))
+print("\nX_test\n")
 print(X_test)
-
-print("Lenght of X_test ",len(X_test))
+print("\nLenght of X_test ",len(X_test))
 ```
 ## OUTPUT:
+# Missing Values
+
+![image](https://github.com/user-attachments/assets/c532d2f5-c836-4803-9e5e-64796dbeebf8)
+
+
+# Duplicates
+
+![image](https://github.com/user-attachments/assets/add00be5-156e-45cf-86a9-4f90d5d55400)
+
+
+# Outliers
+
+![307387703-879dffe5-01ce-46f4-97a2-6576d9cd9c09](https://github.com/user-attachments/assets/db55bde9-2e75-403a-8f2b-3dd4f9de1928)
+
+# Normalized dataset
+
+![image](https://github.com/user-attachments/assets/6cd82ce9-d532-499c-9bcb-5e0d550160c6)
+
+
+# Input and Output
+
+![image](https://github.com/user-attachments/assets/506dc1cf-ad47-43bb-9b79-65751955f812)
+
+# Training and Testing data
+
+![image](https://github.com/user-attachments/assets/7356a696-fa9e-44c8-9a1f-098f645f06a2)
 
 
 
+
+`
 ## RESULT:
 Thus, Implementation of Data Preprocessing is done in python  using a data set downloaded from Kaggle.
-
-
