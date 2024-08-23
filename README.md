@@ -1,5 +1,6 @@
 <H3>S MOHAMED AHSAN</H3>
 <H3>212223240089</H3>
+<H3>DATE : 19/08/24 </H3>
 <H3>EX. NO.1</H3>
 <H1 ALIGN =CENTER> Introduction to Kaggle and Data preprocessing</H1>
 
@@ -63,8 +64,7 @@ print(d.isnull().sum())
 
 #Check for Duplicates
 print(d.duplicated().sum())
-```
-```
+
 #Detect Outliers
 plt.figure(figsize=(6,4))
 sns.scatterplot(x='Age', y='Exited', data=d)
@@ -80,7 +80,8 @@ columns = ['CreditScore', 'Age', 'Tenure', 'Balance', 'NumOfProducts', 'Estimate
 
 # Normalize the specified columns
 d[columns] = scaler.fit_transform(d[columns])
-
+```
+```
 # Display the normalized dataset
 print("NORMALIZED DATASET\n",d)
 
